@@ -2,15 +2,15 @@
 public class FloodFill {
     Cordenada cordenada;
     int voriginal;
-    int vnovo;
+    int novacor;
     public Cordenada[] memory = new Cordenada[0];
     Matriz matriz;
 
-    public FloodFill(Cordenada cordenada, Matriz matriz,int vnovo) {
+    public FloodFill(Cordenada cordenada, Matriz matriz,int novacor) {
         this.cordenada = cordenada;
         this.matriz = matriz;
         this.voriginal = this.matriz.matrix[cordenada.getX()][cordenada.getY()];
-        this.vnovo = vnovo;
+        this.novacor = novacor;
     }
 
     public Cordenada foundcolorable(Cordenada cord){
@@ -54,7 +54,7 @@ public class FloodFill {
         pilha.setData(this.memory);
         for (int i = 0; i < pilha.getData().length; i++){
             Cordenada cord = (Cordenada) pilha.pop();
-            this.matriz.matrix[cord.getY()][cord.getX()] = vnovo;
+            this.matriz.matrix[cord.getY()][cord.getX()] = novacor;
             this.matriz.print();
             System.out.println("==============================");
         }
@@ -67,7 +67,7 @@ public class FloodFill {
         fila.setData(this.memory);
         for (int i = 0; i < fila.getData().length; i++){
             Cordenada cord = (Cordenada) fila.pop();
-            this.matriz.matrix[cord.getY()][cord.getX()] = vnovo;
+            this.matriz.matrix[cord.getY()][cord.getX()] = novacor;
             this.matriz.print();
             System.out.println("==============================");
         }
