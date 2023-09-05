@@ -1,7 +1,7 @@
 // classe FloodFill representa uma implementação do algoritmo de preenchimento por inundação.
 public class FloodFill {
     Cordenada cordenada;
-    int voriginal;
+    int cororigin;
     int novacor;
     public Cordenada[] memory = new Cordenada[0];
     Matriz matriz;
@@ -9,38 +9,16 @@ public class FloodFill {
     public FloodFill(Cordenada cordenada, Matriz matriz,int novacor) {
         this.cordenada = cordenada;
         this.matriz = matriz;
-        this.voriginal = this.matriz.matrix[cordenada.getX()][cordenada.getY()];
+        this.cororigin = this.matriz.matrix[cordenada.getX()][cordenada.getY()];
         this.novacor = novacor;
     }
 
     public Cordenada foundcolorable(Cordenada cord){
         add(cord);
         //checar se cordenada x-1,y deve ser pintada ( =voriginal & inbounds)
-        if (cord.getX()-1 >= 0 && cord.getX()-1 <= matriz.getWithd()){
+        if (cord.getX() < 0 || cord.getX() >= matriz.getWithd() || cord.getY() < 0 || cord.getY() >= matriz.getHeight() || cord.getY() != cororigin || cord.getX() != cororigin){
             Cordenada newcord = new Cordenada(cord.getX()-1,cord.getY());
-            if (matriz.matrix[cord.getY()][cord.getX()-1] == voriginal && !search(newcord)){
-                foundcolorable(newcord);
-            }
-        }
-        //checar se cordenada x,y-1 deve ser pintada ( =voriginal & inbounds)
-        if (cord.getY()-1 >= 0 && cord.getY()-1 <= matriz.getHeight()){
-            Cordenada newcord = new Cordenada(cord.getX(),cord.getY()-1);
-            if (matriz.matrix[cord.getY()-1][cord.getX()] == voriginal && !search(newcord)){
-                foundcolorable(newcord);
-            }
-        }
-        //checar se cordenada x+1,y deve ser pintada ( =voriginal & inbounds)
-        if (cord.getX()+1 >= 0 && cord.getX()+1 <= matriz.getWithd()){
-            Cordenada newcord = new Cordenada(cord.getX()+1,cord.getY());
-            if (matriz.matrix[cord.getY()][cord.getX()+1] == voriginal && !search(newcord)){
-                foundcolorable(newcord);
-            }
-        }
-
-        //checar se cordenada x,y+1 deve ser pintada ( =voriginal & inbounds)
-        if (cord.getY()+1 >= 0 && cord.getY()+1 <= matriz.getHeight()){
-            Cordenada newcord = new Cordenada(cord.getX(),cord.getY()+1);
-            if (matriz.matrix[cord.getY()+1][cord.getX()] == voriginal && !search(newcord)){
+            if (matriz.matrix[cord.getY()][cord.getX()-1] == cororigin && !search(newcord)){
                 foundcolorable(newcord);
             }
         }
